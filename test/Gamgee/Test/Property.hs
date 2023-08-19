@@ -59,7 +59,7 @@ instance T.Arbitrary Token.TokenSpec where
 ensureSuccess :: ST s (Either Eff.EffError a) -> ST s a
 ensureSuccess action = do
   res <- action
-  either (fail . show) return res
+  either (error . show) return res
 
 withSystemDRG :: (T.Testable a) => (CR.SystemDRG -> T.PropertyM IO a) -> T.Property
 withSystemDRG f = T.monadicIO $ do

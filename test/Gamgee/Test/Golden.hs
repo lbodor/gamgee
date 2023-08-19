@@ -36,5 +36,5 @@ getOTPTest = goldenTest "getOTPTest" $ do
                  , Token.tokenAlgorithm = Token.AlgorithmSHA1
                  , Token.tokenDigits    = Token.Digits6
                  , Token.tokenPeriod    = Token.TokenPeriod 30 }
-    Right () <- Op.addToken drg cfg ["nicepassword"] spec
+    either (const ()) (error "foo") <$> Op.addToken drg cfg ["nicepassword"] spec
     mapM (Op.getOTP drg cfg ["nicepassword"] (Token.getIdentifier spec) . fromInteger) [312 + i*30 | i <- [0..4]]
